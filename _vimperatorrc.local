@@ -1,0 +1,51 @@
+set complete=S
+
+set nextpattern^=次へ,次(の)?ページ,次を表示
+"set nextpattern^=次へ
+
+" ページロード時に入力フィールドにフォーカスを与えない
+set focuscontent
+
+" コマンドラインの IME の状態を制御
+" http://vimperator.g.hatena.ne.jp/teramako/20090311/1236776437
+style -name commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+
+" テキストエリアの IME 状態を制御
+" vimperator/plugin/ime_controller.js を利用
+"let g:ex_ime_mode = "inactive"  
+let g:textarea_ime_mode = "inactive"
+
+" INSERTモード中は C-v を有効化
+" http://blogs.dion.ne.jp/pekeblog/archives/7228371.html
+"javascript <'], 'Insert clipboard/selection',
+"function () { liberator.editor.pasteClipboard(); });
+"EOM
+
+
+" コマンドライン、テキストエリア内ではC-v,C-xで貼付/切取
+cnoremap <C-v> <S-Insert>
+inoremap <C-v> <S-Insert>
+
+cnoremap <C-x> <S-Del>
+inoremap <C-x> <S-Del>
+
+" テキストエリアでC-aで全選択
+inoremap <C-a> <C-q><C-a><esc>
+
+" C-cコピー用(どっかのコピペの改良版)
+" Add Mapping `C-c copy or stop loading
+"javascript <<EOM
+"liberator.mappings.addUserMap([liberator.modes.NORMAL,liberator.modes.INSERT], ['<C-c>'],
+"    'Copy selected text or ',
+"    function () {
+"        var sel = document.getSelection();
+"        if (sel) {
+"            liberator.copyToClipboard(sel, true);
+"            echo('Yanked: ' + liberator.util.escapeHTML(sel) );
+"        } else {
+"            BrowserStop();
+"            liberator.echo('Stopped loading !');
+"        }
+"    } , {}
+");
+"EOM
