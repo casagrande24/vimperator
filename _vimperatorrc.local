@@ -1,3 +1,6 @@
+" vim:filetype=vim
+
+set exrc
 set complete=S
 
 set nextpattern^=次へ,次(の)?ページ,次を表示
@@ -5,6 +8,12 @@ set nextpattern^=次へ,次(の)?ページ,次を表示
 
 " ページロード時に入力フィールドにフォーカスを与えない
 set focuscontent
+
+" ESC の連打でハイライト解除
+nmap <Esc><Esc> :nohlsearch<CR>
+
+" テキストエリアでの <C-i> で gvim を開く
+set "editor=C:/Program\\ Files/vim/gvim.exe -f"
 
 " コマンドラインの IME の状態を制御
 " http://vimperator.g.hatena.ne.jp/teramako/20090311/1236776437
